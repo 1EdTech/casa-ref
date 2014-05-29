@@ -1,0 +1,101 @@
+PATH
+  remote: .
+  specs:
+    casa (0.1.0)
+      casa-engine
+      casa-environment
+      mysql2
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    backports (3.6.0)
+    casa-attribute (0.1.0)
+    casa-engine (0.1.0)
+      casa-attribute
+      casa-operation
+      casa-publisher
+      casa-receiver
+      casa-support
+      elasticsearch
+      erubis
+      multi_json
+      rufus-scheduler
+      sequel
+      sinatra
+      thor
+    casa-environment (0.1.0)
+      deep_merge
+      extend_method
+      sequel
+      systemu
+      thor
+    casa-operation (0.1.0)
+    casa-payload (0.1.0)
+      json
+      json-schema
+      multi_json
+    casa-publisher (0.1.0)
+      casa-payload
+      sinatra
+      sinatra-contrib
+    casa-receiver (0.1.0)
+      casa-attribute
+      casa-operation
+      casa-payload
+      casa-support
+      rest-client
+      thor
+    casa-support (0.1.0)
+    deep_merge (1.0.1)
+    elasticsearch (1.0.2)
+      elasticsearch-api (= 1.0.2)
+      elasticsearch-transport (= 1.0.2)
+    elasticsearch-api (1.0.2)
+      multi_json
+    elasticsearch-transport (1.0.2)
+      faraday
+      multi_json
+    erubis (2.7.0)
+    extend_method (1.0.0)
+    faraday (0.9.0)
+      multipart-post (>= 1.2, < 3)
+    json (1.8.1)
+    json-schema (2.2.2)
+    mime-types (2.3)
+    multi_json (1.10.1)
+    multipart-post (2.0.0)
+    mysql2 (0.3.16)
+    rack (1.5.2)
+    rack-protection (1.5.3)
+      rack
+    rack-test (0.6.2)
+      rack (>= 1.0)
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
+    rufus-scheduler (3.0.7)
+      tzinfo
+    sequel (4.10.0)
+    sinatra (1.4.5)
+      rack (~> 1.4)
+      rack-protection (~> 1.4)
+      tilt (~> 1.3, >= 1.3.4)
+    sinatra-contrib (1.4.2)
+      backports (>= 2.0)
+      multi_json
+      rack-protection
+      rack-test
+      sinatra (~> 1.4.0)
+      tilt (~> 1.3)
+    systemu (2.6.4)
+    thor (0.19.1)
+    thread_safe (0.3.4)
+    tilt (1.4.1)
+    tzinfo (1.2.0)
+      thread_safe (~> 0.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  casa!
