@@ -6,8 +6,6 @@ apps and LTI tools. It models real-world decision-making through extensible
 attributes, filter and transform operations, flexible peering relationships,
 etc.
 
-**This gem is under construction and not available as a package at this time.**
-
 ## Setup
 
 Requires:
