@@ -1,4 +1,5 @@
 require 'thor'
+require 'fileutils'
 require 'casa/thor/admin_outlet'
 
 module CASA
@@ -9,6 +10,7 @@ module CASA
 
       def setup
         write_engine_config_file!
+        FileUtils.rm_rf CASA::AdminOutlet::App.public_folder + 'blocks'
       end
 
       no_tasks do
