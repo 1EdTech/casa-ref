@@ -19,7 +19,7 @@ Requires:
 Install from RubyGems:
 
 ```
-gem install casa
+gem install casa --dev
 ```
 
 The CASA engine additionally includes persistence layers:
@@ -47,6 +47,12 @@ To start the engine:
 casa engine start
 ```
 
+To stp[ the engine:
+
+```
+casa engine stop
+```
+
 To view options from configuration paths to ports:
 
 ```
@@ -57,7 +63,7 @@ casa engine help
 
 ##### Why are the search APIs not working?
 
-The most common reason for this is that the engine was unable to resolve an ElasticSearch database. Please ensure ElasticSearch is running and that the engine settings properly reference it, and then restart the CASA engine.
+The most common reason for this is that the engine was unable to resolve an Elasticsearch database. Please ensure Elasticsearch is running and that the engine settings properly reference it, and then restart the CASA engine.
 
 ## License
 
