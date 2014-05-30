@@ -17,8 +17,10 @@ module Casa
         test_existing_settings_file!
 
         settings['id'] = engine_setup_id
+        settings['rack'] = engine_setup_rack
         settings['modules'] = ['publisher','receiver','local','admin']
         settings['database'] = engine_setup_database
+        settings['index'] = engine_setup_index
         settings['jobs'] = engine_setup_jobs
 
         save_settings settings
@@ -57,6 +59,17 @@ module Casa
               say 'Invalid format -- please try again', :red
             end
           end
+
+          retval
+
+        end
+
+        def engine_setup_rack
+
+          retval = {}
+
+          port = ask('Port (empty for default port 9600):').strip
+          retval[:Port] = port.length > 0 ? port : 9600
 
           retval
 
@@ -129,6 +142,41 @@ module Casa
           end
 
           retval
+
+        end
+
+        def engine_setup_index
+
+          adapter = engine_setup_index_adapter
+
+          if adapter == 'elasticsearch'
+            engine_setup_index_elasticsearch
+          end
+
+        end
+
+        def engine_setup_index_adapter
+
+          if yes? "Use ElasticSearch ('y' to use)?"
+            'elasticsearch'
+          else
+            say 'No indexer will be used', :cyan
+            false
+          end
+
+        end
+
+        def engine_setup_index_elasticsearch
+
+          index = { :type => 'elasticsearch', :hosts => [] }
+
+          host = ask('Elasticsearch Host (empty when finished):').strip
+          while host.length > 0
+            index[:hosts] << host
+            host = ask('Elasticsearch Host (empty when finished):').strip
+          end
+
+          index
 
         end
 
