@@ -16,5 +16,6 @@ Gem::Specification.new do |s|
   s.require_paths = ['lib']
 
   s.add_dependency 'casa-engine'
+  s.add_dependency 'systemu'
 
 end

@@ -27,16 +27,20 @@ module Casa
 
       no_tasks do
 
+        def settings_dir_path
+          @settings_dir_path ||= Pathname.new(ENV['HOME']) + options[:settings_dir]
+        end
+
         def pid_file_path
-          @pid_file_path ||= Pathname.new(ENV['HOME']) + options[:settings_dir] + options[:pid_file]
+          @pid_file_path ||= settings_dir_path + options[:pid_file]
         end
 
         def settings_file_path
-          @settings_file_path ||= Pathname.new(ENV['HOME']) + options[:settings_dir] + options[:engine_settings_file]
+          @settings_file_path ||= settings_dir_path + options[:engine_settings_file]
         end
 
         def attributes_settings_dir_path
-          @attributes_settings_dir_path ||= Pathname.new(ENV['HOME']) + options[:settings_dir] + options[:attributes_settings_dir]
+          @attributes_settings_dir_path ||= settings_dir_path + options[:attributes_settings_dir]
         end
 
       end
