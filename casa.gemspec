@@ -3,7 +3,7 @@
 Gem::Specification.new do |s|
 
   s.name        = 'casa'
-  s.version     = '0.1.0.dev'
+  s.version     = '0.1.1.dev'
   s.summary     = 'Reference implementation of the Community App Sharing Architecture'
   s.authors     = ['Eric Bollens']
   s.email       = ['ebollens@ucla.edu']
@@ -15,7 +15,6 @@ Gem::Specification.new do |s|
   s.test_files    = s.files.grep(%r{^(test|spec|features)/})
   s.require_paths = ['lib']
 
-  s.add_dependency 'casa-environment'
   s.add_dependency 'casa-engine'
 
 end
