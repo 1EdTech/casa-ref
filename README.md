@@ -29,6 +29,12 @@ These should be running when the engine is started.
 
 The Ruby gem for the database you're using must also be installed (`mysql2`, `freetds` or `sqlite3`).
 
+Finally, you should also make sure to install any gems needed for the attributes you'll be using. The default attribute set, which is configured into `~/.casa/attributes` by default after you run `casa engine setup`, requires:
+
+```
+gem install casa-attributes-common
+```
+
 ## Usage
 
 ### Engine
