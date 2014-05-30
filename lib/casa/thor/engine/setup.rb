@@ -22,6 +22,7 @@ module CASA
         settings['database'] = engine_setup_database
         settings['index'] = engine_setup_index
         settings['jobs'] = engine_setup_jobs
+        settings['admin'] = engine_setup_admin
 
         save_settings settings
 
@@ -177,6 +178,18 @@ module CASA
           end
 
           index
+
+        end
+
+        def engine_setup_admin
+
+          retval = {}
+
+          retval[:username] = ask('Admin Outlet Username:').strip
+          retval[:password] = ask('Admin Outlet Password:').strip
+          retval[:origin] = ask('Admin Outlet Origin:').strip
+
+          retval
 
         end
 
