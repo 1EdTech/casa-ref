@@ -2,4 +2,4 @@
 
 require 'casa/thor/runner'
 
-Casa::Thor::Runner.start
+CASA::Thor::Runner.start

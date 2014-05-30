@@ -7,7 +7,7 @@ require 'casa/attribute/loader'
 require 'casa/engine/attribute/loader'
 require 'casa/support/scoped_logger'
 
-module Casa
+module CASA
   module Thor
     class Engine < ::Thor
 

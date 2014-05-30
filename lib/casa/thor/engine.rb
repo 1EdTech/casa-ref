@@ -1,7 +1,7 @@
 require 'thor'
 require 'pathname'
 
-module Casa
+module CASA
   module Thor
     class Engine < ::Thor
 

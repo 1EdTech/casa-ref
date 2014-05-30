@@ -4,7 +4,7 @@ require 'json'
 require 'securerandom'
 require 'fileutils'
 
-module Casa
+module CASA
   module Thor
     class Engine < ::Thor
 

@@ -1,10 +1,10 @@
 require 'thor'
 require 'fileutils'
-require 'casa/thor/engine'
+require 'casa/thor/admin_outlet'
 
 module CASA
   module Thor
-    class Engine < ::Thor
+    class AdminOutlet < ::Thor
 
       desc 'status', 'Status of the CASA engine'
 
