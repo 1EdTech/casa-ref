@@ -225,7 +225,7 @@ module Casa
 
         def settings
           unless @settings
-            abort "\e[31m\e[1mSettings file `#{settings_file_path}` is not defined\e[0m\n\e[31mRun 'casa engine setup' to resolve" unless File.exists? settings_file_path
+            abort "\e[31m\e[1mSettings file `#{settings_file_path}` is not defined\e[0m\n\e[31mRun 'casa engine setup' to resolve\e[0m" unless File.exists? settings_file_path
             @settings = JSON::parse File.read settings_file_path
           end
           @settings
