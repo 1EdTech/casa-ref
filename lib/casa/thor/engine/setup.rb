@@ -32,7 +32,7 @@ module Casa
         def test_existing_settings_file!
 
           if File.exists? settings_file_path
-            say 'Settings file already exists', :green
+            say "Settings file already exists -- #{settings_file_path}", :green
             if yes? "Would you like to overwrite ('y' to overwrite)?"
               File.delete settings_file_path
               say 'Settings file deleted', :green
@@ -69,7 +69,7 @@ module Casa
           retval = {}
 
           port = ask('Port (empty for default port 9600):').strip
-          retval[:Port] = port.length > 0 ? port : 9600
+          retval[:port] = port.length > 0 ? port : 9600
 
           retval
 

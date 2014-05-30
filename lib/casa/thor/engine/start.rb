@@ -116,6 +116,7 @@ module Casa
 
         def start!
           Rack::Server.start rack_options
+          puts rack_options
         end
 
         # ACCESSORS
@@ -194,9 +195,11 @@ module Casa
         end
 
         def rack_options
-          @rack_options ||= settings['rack'].merge({
-            :app => rack_app
-          })
+          unless @rack_options
+            @rack_options = { :app => rack_app }
+            @rack_options[:Port] = settings['rack']['port'] if settings['rack'].include? 'port'
+          end
+          @rack_options
         end
 
         def sequel_connection
