@@ -26,6 +26,8 @@ module CASA
 
         save_settings settings
 
+        save_attribute_definitions!
+
       end
 
       no_tasks do
@@ -197,6 +199,52 @@ module CASA
           FileUtils.mkdir_p settings_file_path.parent
           File.open(settings_file_path, 'w+') {|f| f.write settings.to_json }
           say "Settings file saved to #{settings_file_path}", :green
+        end
+
+        def save_attribute_definitions!
+
+          FileUtils.mkdir_p attributes_settings_dir_path
+
+          [
+            {
+              "name" => "author",
+              "class" => "CASA::Attribute::Author"
+            },
+            {
+                "name" => "categories",
+                "class" => "CASA::Attribute::Categories"
+            },
+            {
+                "name" => "description",
+                "class" => "CASA::Attribute::Description"
+            },
+            {
+                "name" => "explicit",
+                "class" => "CASA::Attribute::Explicit"
+            },
+            {
+                "name" => "organization",
+                "class" => "CASA::Attribute::Organization"
+            },
+            {
+                "name" => "tags",
+                "class" => "CASA::Attribute::Tags"
+            },
+            {
+                "name" => "title",
+                "class" => "CASA::Attribute::Title"
+            }
+          ].each do |attribute|
+
+            File.open(attributes_settings_dir_path + "#{attribute['name']}.json", 'w') do |f|
+              f.write({
+                'name' => attribute['name'],
+                'class' => attribute['class']
+              }.to_json)
+            end
+
+          end
+
         end
 
       end
