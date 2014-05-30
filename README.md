@@ -33,7 +33,7 @@ The Ruby gem for the database you're using must also be installed (`mysql2`, `fr
 
 ### Engine
 
-To define your engine settings:
+To define the engine settings:
 
 ```
 casa engine setup
@@ -45,16 +45,54 @@ To start the engine:
 casa engine start
 ```
 
-To stp[ the engine:
+To get the status of the engine:
+
+```
+casa engine status
+```
+
+To stop the engine:
 
 ```
 casa engine stop
 ```
 
-To view options from configuration paths to ports:
+To view options from configuration paths to pid files:
 
 ```
 casa engine help
+```
+
+### Admin Outlet
+
+To define the admin outlet configuration:
+
+```
+casa admin_outlet setup
+```
+
+To start the admin outlet:
+
+```
+casa admin_outlet start
+```
+
+To get the status of the admin outlet:
+
+```
+casa admin_outlet status
+```
+
+To stop the admin outlet:
+
+```
+casa admin_outlet stop
+```
+
+To view options from configuration paths to pid files:
+
+```
+casa admin_outlet help
 ```
 
 ## FAQ
