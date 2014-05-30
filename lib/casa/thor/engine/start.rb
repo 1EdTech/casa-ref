@@ -116,7 +116,6 @@ module Casa
 
         def start!
           Rack::Server.start rack_options
-          puts rack_options
         end
 
         # ACCESSORS
@@ -196,7 +195,11 @@ module Casa
 
         def rack_options
           unless @rack_options
-            @rack_options = { :app => rack_app }
+            @rack_options = {
+                :app => rack_app,
+                :daemonize => true,
+                :pid => pid_file_path
+            }
             @rack_options[:Port] = settings['rack']['port'] if settings['rack'].include? 'port'
           end
           @rack_options

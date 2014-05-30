@@ -20,7 +20,16 @@ module Casa
                    :default => 'attributes',
                    :desc => 'Path relative to settings_dir for the directory of attribute config files'
 
+      class_option :pid_file,
+                   :type => :string,
+                   :default => 'engine.pid',
+                   :desc => 'Path relative to settings_dir for the engine pid file when running'
+
       no_tasks do
+
+        def pid_file_path
+          @pid_file_path ||= Pathname.new(ENV['HOME']) + options[:settings_dir] + options[:pid_file]
+        end
 
         def settings_file_path
           @settings_file_path ||= Pathname.new(ENV['HOME']) + options[:settings_dir] + options[:engine_settings_file]

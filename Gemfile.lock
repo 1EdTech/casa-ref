@@ -4,7 +4,6 @@ PATH
     casa (0.1.0)
       casa-engine
       casa-environment
-      mysql2
 
 GEM
   remote: https://rubygems.org/
@@ -65,7 +64,6 @@ GEM
     mime-types (2.3)
     multi_json (1.10.1)
     multipart-post (2.0.0)
-    mysql2 (0.3.16)
     rack (1.5.2)
     rack-protection (1.5.3)
       rack
