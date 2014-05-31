@@ -1,6 +1,7 @@
 require 'thor'
 require 'fileutils'
 require 'systemu'
+require 'bundler'
 require 'casa/thor/admin_outlet'
 require 'casa/admin_outlet/app'
 
