@@ -223,6 +223,10 @@ module CASA
                 "class" => "CASA::Attribute::Explicit"
             },
             {
+                "name" => "icon",
+                "class" => "CASA::Attribute::Icon"
+            },
+            {
                 "name" => "organization",
                 "class" => "CASA::Attribute::Organization"
             },
