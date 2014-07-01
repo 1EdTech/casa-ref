@@ -11,7 +11,7 @@ module CASA
                    :default => '.casa',
                    :desc => 'Path for the configuration directory relative to the home directory'
 
-      class_option :engine_settings_file,
+      class_option :outlet_settings_file,
                    :type => :string,
                    :default => 'admin_outlet-engine_config.js',
                    :desc => 'Path relative to settings_dir for the admin outlet\'s engine config file'
@@ -32,8 +32,8 @@ module CASA
           @settings_dir_path ||= Pathname.new(ENV['HOME']) + options[:settings_dir]
         end
 
-        def engine_settings_file_path
-          @engine_settings_file_path ||= settings_dir_path + options[:engine_settings_file]
+        def outlet_settings_file_path
+          @outlet_settings_file_path ||= settings_dir_path + options[:outlet_settings_file]
         end
 
         def gem_base_path

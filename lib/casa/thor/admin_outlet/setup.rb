@@ -16,7 +16,7 @@ module CASA
       no_tasks do
 
         def write_engine_config_file!
-          File.open(engine_settings_file_path, 'w') do |file|
+          File.open(outlet_settings_file_path, 'w') do |file|
             file.write "var EngineConfig = {
             url: '#{admin_outlet_setup_engine_url}',
             id: '#{admin_outlet_setup_engine_uuid}'
@@ -42,7 +42,8 @@ module CASA
         def admin_outlet_setup_engine_url
 
           unless @admin_outlet_setup_engine_url
-            @admin_outlet_setup_engine_url = ask('Engine URL:').strip
+            @admin_outlet_setup_engine_url = ask('Engine URL (empty for default "http://localhost:9600"):').strip
+            @admin_outlet_setup_engine_url = 'http://localhost:9600' unless @admin_outlet_setup_engine_url.length
           end
 
           @admin_outlet_setup_engine_url

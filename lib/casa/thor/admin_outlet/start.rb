@@ -11,7 +11,17 @@ module CASA
 
       desc 'start', 'Start the CASA admin outlet'
 
+      method_option :rebuild,
+                    :type => :boolean,
+                    :default => false,
+                    :desc => 'Rebuild the application CSS and JS such as after config changes'
+
       def start
+
+        if options[:rebuild]
+          FileUtils.rm_f CASA::AdminOutlet::App.public_folder + 'blocks/blocks.js'
+          FileUtils.rm_f CASA::AdminOutlet::App.public_folder + 'blocks/blocks.css'
+        end
 
         compile! unless File.exists?(CASA::AdminOutlet::App.public_folder + 'blocks/blocks.js') and File.exists?(CASA::AdminOutlet::App.public_folder + 'blocks/blocks.css')
 
@@ -23,13 +33,13 @@ module CASA
 
         def compile!
 
-          unless File.exists? engine_settings_file_path
-            say "Engine configuration file missing -- #{engine_settings_file_path}", :red
+          unless File.exists? outlet_settings_file_path
+            say "Engine configuration file missing -- #{outlet_settings_file_path}", :red
             say 'Use `casa admin_outlet setup\' to define this file', [:red, :bold]
             abort
           end
 
-          FileUtils.cp(engine_settings_file_path, gem_base_path + 'src/config/engine.js')
+          FileUtils.cp(outlet_settings_file_path, gem_base_path + 'src/config/engine.js')
 
           Bundler.with_clean_env do
 
