@@ -3,8 +3,9 @@
 Gem::Specification.new do |s|
 
   s.name        = 'casa'
-  s.version     = '0.1.4.dev'
+  s.version     = '0.1.5.dev'
   s.summary     = 'Reference implementation of the Community App Sharing Architecture'
+  s.description     = 'Reference implementation of the Community App Sharing Architecture'
   s.authors     = ['Eric Bollens']
   s.email       = ['ebollens@ucla.edu']
   s.homepage    = 'http://imsglobal.github.io/casa'
