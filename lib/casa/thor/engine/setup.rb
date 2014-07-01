@@ -107,15 +107,17 @@ module CASA
 
           conn = { :adapter => adapter }
 
-          hostname = ask('Hostname:').strip
+          hostname = ask('Hostname (empty for default "localhost"):').strip
           conn[:host] = hostname.length > 0 ? hostname : 'localhost'
 
-          conn[:user] = ask('Username:').strip
+          username = ask('Username (empty for default "root"):').strip
+          conn[:user] = username.length > 0 ? username : 'root'
 
-          password = ask('Password:').strip
+          password = ask('Password (empty for no password):').strip
           conn[:password] = password if password.length > 0
 
-          conn[:database] = ask('Database:').strip
+          dbname = ask('Database (empty for default "casa"):').strip
+          conn[:database] = dbname.length > 0 ? dbname : 'casa'
 
           conn
 
@@ -123,10 +125,12 @@ module CASA
 
         def engine_setup_database_sqlite
 
-          {
-              :adapter => 'sqlite',
-              :database => ask('Database:').strip
-          }
+          conn = { :adapter => 'sqlite' }
+
+          dbfile = ask('Database (empty for default "db.sqlite3"):').strip
+          conn[:database] = dbfile.length > 0 ? dbfile : 'db.sqlite3'
+
+          conn
 
         end
 
@@ -135,13 +139,29 @@ module CASA
           retval = {'intervals' => {}}
 
           {
-              'receive_in' => 'ReceiveIn',
-              'local_to_adj_out' => 'LocalToAdjOut',
-              'adj_in_to_adj_out' => 'AdjInToAdjOut',
-              'adj_in_to_local' => 'AdjInToLocal',
-              'local_index_rebuild' => 'RebuildLocalIndex'
-          }.each do |name, title|
-            retval['intervals'][name] = ask("Refresh interval for #{title} (such as '30s', '10m', '2h' or '1d'):").strip
+              'receive_in' => {
+                  :title => 'ReceiveIn',
+                  :default => '1h'
+              },
+              'local_to_adj_out' => {
+                  :title => 'LocalToAdjOut',
+                  :default => '1d'
+              },
+              'adj_in_to_adj_out' => {
+                  :title => 'AdjInToAdjOut',
+                  :default => '1d'
+              },
+              'adj_in_to_local' => {
+                  :title => 'AdjInToLocal',
+                  :default => '1d'
+              },
+              'local_index_rebuild' => {
+                  :title => 'RebuildLocalIndex',
+                  :default => '3d'
+              }
+          }.each do |name, data|
+            retval['intervals'][name] = ask("Refresh interval for #{data[:title]} (empty for default \"#{data[:default]}\"):").strip
+            retval['intervals'][name] = data[:default] unless retval['intervals'][name].length > 0
           end
 
           retval
@@ -160,7 +180,7 @@ module CASA
 
         def engine_setup_index_adapter
 
-          if yes? "Use ElasticSearch ('y' to use)?"
+          unless no? "Use ElasticSearch ('n' to disable)?"
             'elasticsearch'
           else
             say 'No indexer will be used', :cyan
@@ -173,7 +193,8 @@ module CASA
 
           index = { :type => 'elasticsearch', :hosts => [] }
 
-          host = ask('Elasticsearch Host (empty when finished):').strip
+          host = ask('Elasticsearch Host (empty for default "http://localhost:9200"):').strip
+          host = 'http://localhost:9200' unless host.length > 0
           while host.length > 0
             index[:hosts] << host
             host = ask('Elasticsearch Host (empty when finished):').strip
@@ -188,8 +209,11 @@ module CASA
           retval = {}
 
           retval[:username] = ask('Admin Outlet Username:').strip
+
           retval[:password] = ask('Admin Outlet Password:').strip
-          retval[:origin] = ask('Admin Outlet Origin:').strip
+
+          retval[:origin] = ask('Admin Outlet Origin (empty for default "http://localhost:9601"):').strip
+          retval[:origin] = 'http://localhost:9601' unless retval[:origin].length > 0
 
           retval
 
