@@ -6,6 +6,7 @@ require 'casa/engine/admin_app'
 require 'casa/attribute/loader'
 require 'casa/engine/attribute/loader'
 require 'casa/support/scoped_logger'
+require 'casa/rack/handler/thin'
 
 module CASA
   module Thor
@@ -14,6 +15,11 @@ module CASA
       desc 'start', 'Start the CASA engine'
 
       def start
+
+        Rack::Handler::Thin.casa_server_config = {
+            'port' => 9600,
+            'host' => '0.0.0.0'
+        }.merge JSON.parse File.read server_settings_file_path
 
         load_engine_settings!
         load_attribute_default_settings!

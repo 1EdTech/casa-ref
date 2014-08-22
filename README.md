@@ -8,11 +8,31 @@ etc.
 
 ## Setup
 
-Requires:
+##### Requirements
 
-* Ruby 1.9 or above
+Both engine and admin outlet require:
+
+* Ruby 2.x
 * RubyGems
 * Bundler
+
+The engine additionally requires:
+
+* MySQL, MsSQL or SQLLite
+* Ruby gem for MySQL, MsSQL or SQLLite based on which is available on server
+
+The engine additionally recommends:
+
+* Elasticsearch
+* OpenSSL
+
+The admin outlet additionally requires:
+
+* Node.js
+* NPM
+* Java 1.4+
+
+##### Installation of RubyGems
 
 Install from RubyGems:
 
@@ -20,14 +40,18 @@ Install from RubyGems:
 gem install casa --dev
 ```
 
+##### Persistence Layer Availability
+
 The CASA engine additionally includes persistence layers:
 
 * Database: MySQL, MsSQL or SQLite (required)
 * Indexer: Elasticsearch (optional)
 
-These should be running when the engine is started.
+These have to be running when the engine is started.
 
 The Ruby gem for the database you're using must also be installed (`mysql2`, `freetds` or `sqlite3`).
+
+##### Attribute Installation
 
 Finally, you should also make sure to install any gems needed for the attributes you'll be using. The default attribute set, which is configured into `~/.casa/attributes` by default after you run `casa engine setup`, requires:
 
@@ -35,7 +59,29 @@ Finally, you should also make sure to install any gems needed for the attributes
 gem install casa-attributes-common
 ```
 
+##### SSL Certificate
+
+This reference implementation runs CASA over HTTPS. Consequently, an SSL certificate is necessary.
+
+For test environments, you can generate one locally as:
+
+```
+openssl req  -nodes -new -x509  -keyout localhost.key -out localhost.crt
+```
+
+For production environments, a real certificate should be acquired.
+
 ## Usage
+
+## General
+
+Whether running the engine or the admin outlet, you should call:
+
+```
+casa server setup
+```
+
+This will allow you to specify the SSL configuration for your server where the engine and/or admin outlet are running.
 
 ### Engine
 

@@ -15,6 +15,11 @@ module CASA
                    :default => 'engine.json',
                    :desc => 'Path relative to settings_dir for the engine config file'
 
+      class_option :server_settings_file,
+                   :type => :string,
+                   :default => 'server.json',
+                   :desc => 'Path relative to settings_dir for the server config file'
+
       class_option :attributes_settings_dir,
                    :type => :string,
                    :default => 'attributes',
@@ -41,6 +46,10 @@ module CASA
 
         def attributes_settings_dir_path
           @attributes_settings_dir_path ||= settings_dir_path + options[:attributes_settings_dir]
+        end
+
+        def server_settings_file_path
+          @server_settings_file_path ||= settings_dir_path + options[:server_settings_file]
         end
 
       end

@@ -19,5 +19,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'casa-engine'
   s.add_dependency 'casa-admin-outlet'
   s.add_dependency 'systemu'
+  s.add_dependency 'thin'
 
 end

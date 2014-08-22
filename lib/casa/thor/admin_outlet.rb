@@ -16,6 +16,16 @@ module CASA
                    :default => 'admin_outlet-engine_config.js',
                    :desc => 'Path relative to settings_dir for the admin outlet\'s engine config file'
 
+      class_option :server_settings_file,
+                   :type => :string,
+                   :default => 'server.json',
+                   :desc => 'Path relative to settings_dir for the server config file'
+
+      class_option :outlet_ssl_settings_file,
+                   :type => :string,
+                   :default => 'outlet-ssl.json',
+                   :desc => 'Path relative to settings_dir for the outlet SSL config file'
+
       class_option :pid_file,
                    :type => :string,
                    :default => 'admin_outlet.pid',
@@ -46,6 +56,10 @@ module CASA
 
         def port
           @port ||= options[:port]
+        end
+
+        def server_settings_file_path
+          @server_settings_file_path ||= settings_dir_path + options[:server_settings_file]
         end
 
       end

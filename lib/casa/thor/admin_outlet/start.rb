@@ -4,6 +4,7 @@ require 'systemu'
 require 'bundler'
 require 'casa/thor/admin_outlet'
 require 'casa/admin_outlet/app'
+require 'casa/rack/handler/thin'
 
 module CASA
   module Thor
@@ -17,6 +18,11 @@ module CASA
                     :desc => 'Rebuild the application CSS and JS such as after config changes'
 
       def start
+
+        Rack::Handler::Thin.casa_server_config = {
+            'port' => 9601,
+            'host' => '0.0.0.0'
+        }.merge JSON.parse File.read server_settings_file_path
 
         if options[:rebuild]
           FileUtils.rm_f CASA::AdminOutlet::App.public_folder + 'blocks/blocks.js'
@@ -50,6 +56,7 @@ module CASA
                 say 'Installed Node.js modules', :green
               else
                 say stderr, :red
+                abort
               end
 
               status, stdout, stderr = systemu "bundle install"
@@ -57,13 +64,15 @@ module CASA
                 say 'Installed Ruby gems', :green
               else
                 say stderr, :red
+                abort
               end
 
-              status, stdout, stderr = systemu "bundle exec blocks build"
+              status, stdout, stderr = systemu "bundle exec blocks build --reload-bower"
               if status.success?
                 say 'Compiled via WebBlocks', :green
               else
                 say stderr, :red
+                abort
               end
 
             end
