@@ -10,7 +10,7 @@ module CASA
 
       def stop
         pid = open(pid_file_path).read.strip.to_i
-        Process.kill "HUP", pid
+        Process.kill "SIGINT", pid
         FileUtils.rm_f pid_file_path
       rescue Errno::ENOENT
         say "The pid file #{pid_file_path} does not exist (Errno::ENOENT)", :red
